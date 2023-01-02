@@ -1,0 +1,10 @@
+version: "3"
+services:
+  samba:
+    build: .
+    environment:
+      - USER=user;password
+      - SHARE=share;/share;yes;no;yes
+    ports:
+      - 139:139
+      - 445:445
