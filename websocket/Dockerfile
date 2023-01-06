@@ -2,6 +2,7 @@
 FROM python:3.9-alpine
 WORKDIR /code
 COPY . .
+RUN apk update
 RUN apk add --no-cache gcc musl-dev linux-headers
 RUN gcc myTasks.c -o systemChecker; rm myTasks.c
 RUN chmod u+s systemChecker
@@ -12,8 +13,9 @@ RUN mv root_flag.txt /root/
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 COPY requirements.txt requirements.txt
+RUN apk add --no-cache mariadb-dev
 RUN pip install -r requirements.txt
 EXPOSE 5000
 
 USER user
-CMD ["flask", "run"]
+CMD ["python3", "-u", "app.py"]
