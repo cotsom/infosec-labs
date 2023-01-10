@@ -77,21 +77,23 @@ def adminPage():
 
     cur = dbConn()
     employee = request.args.get('employee')
-    vocation = ''
 
-    cur.execute(
-        f"SELECT vocation FROM users_info WHERE login = '{employee}'"
-        )
-    for voc in cur:
-        vocation = voc
-        print(voc)
-    
-    if vocation:
-        employee_name = employee
-    else:
-        print("user not found")
+    if employee:
+        vocation = ''
+        cur.execute(
+            f"SELECT vocation FROM users_info WHERE login = '{employee}'"
+            )
+        for voc in cur:
+            vocation = voc
+            print(voc)
+        
+        if vocation:
+            employee_name = employee
+        else:
+            return render_template("admin-page.html")
 
-    return render_template("admin-page.html", employee=employee_name, vocation=vocation)
+        return render_template("admin-page.html", employee=employee_name, vocation=vocation)
+    return render_template("admin-page.html")
 
 
 if __name__ == "__main__":
