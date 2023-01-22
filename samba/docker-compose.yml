@@ -5,6 +5,9 @@ services:
     environment:
       - USER=user;password
       - SHARE=share;/share;yes;no;yes
+      - SHARE1=IT;/IT;yes;no;yes
+      - SHARE2=accounting;/accounting;yes;no;yes
+      - SHARE3=bussiness;/bussiness;yes;no;yes
     ports:
       - 139:139
       - 445:445
