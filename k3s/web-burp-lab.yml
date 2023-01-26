@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-burp-flag
+data:
+  flag.txt: |
+    test123
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-burp-lab
+  labels:
+    app: web-burp-pod
+spec:
+  containers:
+    - name: web-burp
+      image: cotsom/web-burp:latest
+      ports:
+        - containerPort: 5000
+      volumeMounts:
+        - name: web-burp-flag
+          mountPath: /home/user/
+      resources:
+          limits:
+            memory: 10Mi
+            cpu: "0.1"
+          requests:
+            memory: 10Mi
+            cpu: "0.1"
+  volumes:
+    - name: web-burp-flag
+      configMap:
+        name: web-burp-flag
