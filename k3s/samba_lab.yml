@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: samba-env
+data:
+  USER: "user;password"
+  SHARE: "share;/share;yes;no;yes"
+  SHARE1: "IT;/IT;yes;no;yes"
+  SHARE2: "accounting;/accounting;yes;no;yes"
+  SHARE3: "bussiness;/bussiness;yes;no;yes"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: samba-flag
+data:
+  flag.txt: |
+    test123
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: samba-lab
+  labels:
+    app: samba-lab-pod
+spec:
+  containers:
+    - name: samba
+      image: dperson/samba:latest
+      ports:
+        - containerPort: 139
+        - containerPort: 445
+      envFrom:
+        - configMapRef:
+            name: samba-env
+      volumeMounts:
+        - name: samba-flag
+          mountPath: /share/
+      resources:
+          limits:
+            memory: 10Mi
+            cpu: "0.1"
+          requests:
+            memory: 10Mi
+            cpu: "0.1"
+  volumes:
+    - name: samba-flag
+      configMap:
+        name: samba-flag
