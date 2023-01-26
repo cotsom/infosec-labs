@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microbot
+  labels:
+    app: microbot-test
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: microbot-test-deployment
+  template:
+    metadata:
+      labels:
+        app: microbot-test-deployment
+    spec:
+      containers:
+        - name: microbot
+          image: dontrebootme/microbot:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 10Mi
+              cpu: "0.1"
+            requests:
+              memory: 10Mi
+              cpu: "0.1"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  microbot-svc
+spec:
+  selector:
+    app: microbot-test-deployment
+  type:  LoadBalancer
+  ports:
+  - name:  name-of-the-port
+    port:  8000
+    targetPort:  80

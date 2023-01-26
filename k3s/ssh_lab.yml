@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssh-lab
+  labels:
+    app: ssh-lab
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ssh-lab-deployment
+  template:
+    metadata:
+      labels:
+        app: ssh-lab-deployment
+    spec:
+      containers:
+        - name: ssh-lab
+          image: cotsom/ssh_lab
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 2222
+          resources:
+            limits:
+              memory: 10Mi
+              cpu: "0.1"
+            requests:
+              memory: 10Mi
+              cpu: "0.1"
