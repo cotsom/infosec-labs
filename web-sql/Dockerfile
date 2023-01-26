@@ -3,6 +3,7 @@ FROM python:3.9-alpine
 WORKDIR /code
 COPY . .
 RUN apk update
+RUN apk add --no-cache gcc musl-dev linux-headers
 RUN addgroup -g 2000 user \
     && adduser -u 2000 -G user -s /bin/sh -D user
 ENV FLASK_APP=app.py
