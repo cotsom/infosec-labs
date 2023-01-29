@@ -33,15 +33,24 @@ data:
 
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-sqlmap-env
+data:
+  MYSQL_DATABASE: "users"
+  MYSQL_ROOT_PASSWORD: "password"
+
+---
+apiVersion: v1
 kind: Pod
 metadata:
-  name: web-burp-lab
+  name: web-sqlmap-lab
   labels:
-    app: web-burp-pod
+    app: web-sqlmap-pod
 spec:
   containers:
-    - name: web-burp
-      image: cotsom/web-burp:latest
+    - name: web-sqlmap
+      image: cotsom/web-sqlmap:latest
       ports:
         - containerPort: 5000
       resources:
@@ -51,7 +60,7 @@ spec:
         requests:
           memory: 10Mi
           cpu: "0.1"
-    - name: db
+    - name: mariadb
       image: mariadb
       resources:
         limits:
@@ -60,6 +69,9 @@ spec:
         requests:
           memory: 10Mi
           cpu: "0.1"
+      envFrom:
+        - configMapRef:
+            name: web-sqlmap-env
       volumeMounts:
         - name: data
           mountPath: /docker-entrypoint-initdb.d/
