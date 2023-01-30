@@ -4,14 +4,13 @@ from flask import Flask, redirect, render_template, request, session, url_for
 from flask_sock import Sock
 import mariadb
 
-
 app = Flask(__name__)
 app.secret_key = 'g8y348f3h4f34jf93ij4g3u49gh3487fh34fj8347hfg3487fh348jf34hf837fg'
 sock = Sock(app)
 config = {
-    "user": "root",
-    "password": "password",
-    "host": "web-sqlmap-lab",
+    "user": os.getenv("DB_USER", "root"),
+    "password": os.getenv("DB_PASS", "password"),
+    "host": os.getenv("DB_HOST", "web-sqlmap-lab"),
     "port": 3306,
     "database": "users"
     }

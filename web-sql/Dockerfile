@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM python:3.9-alpine
 WORKDIR /code
-COPY . .
 RUN apk update
 RUN apk add --no-cache gcc musl-dev linux-headers
 RUN addgroup -g 2000 user \
@@ -10,7 +9,9 @@ ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 COPY requirements.txt requirements.txt
 RUN apk add --no-cache mariadb-dev
+COPY requirements.txt .
 RUN pip install -r requirements.txt
+COPY . .
 EXPOSE 5000
 
 USER user
