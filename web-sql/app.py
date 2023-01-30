@@ -11,7 +11,7 @@ sock = Sock(app)
 config = {
     "user": "root",
     "password": "password",
-    "host": "mariadb",
+    "host": "web-sqlmap-lab",
     "port": 3306,
     "database": "users"
     }

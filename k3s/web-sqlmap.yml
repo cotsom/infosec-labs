@@ -62,6 +62,8 @@ spec:
           cpu: "0.1"
     - name: mariadb
       image: mariadb
+      ports:
+        - containerPort: 3306
       resources:
         limits:
           memory: 10Mi
