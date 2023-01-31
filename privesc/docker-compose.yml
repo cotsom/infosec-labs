@@ -1,7 +1,9 @@
 version: "3"
 services:
   openssh-server:
-    build: .
+    build: 
+      context: .
+    image: cotsom/privesc
     environment:
       - PUID=1000
       - PGID=1000
