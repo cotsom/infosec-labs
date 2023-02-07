@@ -11,5 +11,5 @@ services:
       - USER_PASSWORD=password #optional
       - USER_NAME=user #optional
     ports:
-      - 2222:2222
+      - 22:2222
     restart: always
