@@ -24,9 +24,10 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: secure-shell-lab
+  name: secure-shell
   labels:
-    app: secure-shell-lab-pod
+    app: secure-shell-{{ .ClientName }}
+    client: "{{ .ClientName }}"
 spec:
   containers:
     - name: secure-shell
@@ -49,4 +50,4 @@ spec:
   volumes:
     - name: secure-shell-flag
       configMap:
-        name: secure-shell-flag
+        name: secure-shell-flag-{{ .ClientName }}

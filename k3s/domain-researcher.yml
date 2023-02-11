@@ -10,9 +10,10 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: domain-researcher-lab
+  name: domain-researcher
   labels:
-    app: domain-researcher-pod
+    app: domain-researcher-{{ .ClientName }}
+    client: "{{ .ClientName }}"
 spec:
   containers:
     - name: domain-researcher
@@ -32,4 +33,4 @@ spec:
   volumes:
     - name: domain-researcher-flag
       configMap:
-        name: domain-researcher-flag
+        name: domain-researcher-flag-{{ .ClientName }}

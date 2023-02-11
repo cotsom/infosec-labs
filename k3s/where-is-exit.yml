@@ -10,9 +10,10 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: where-is-exit-lab
+  name: where-is-exit
   labels:
-    app: where-is-exit-pod
+    app: where-is-exit-{{ .ClientName }}
+    client: "{{ .ClientName }}"
 spec:
   containers:
     - name: where-is-exit
@@ -32,4 +33,4 @@ spec:
   volumes:
     - name: where-is-exit-flag
       configMap:
-        name: where-is-exit-flag
+        name: where-is-exit-flag-{{ .ClientName }}

@@ -55,15 +55,16 @@ metadata:
 data:
   DB_USER: "root"
   DB_PASS: "password"
-  DB_HOST: "admin-spawn-lab"
+  DB_HOST: "admin-spawn-{{ .ClientName }}"
 
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: admin-spawn-lab
+  name: admin-spawn
   labels:
-    app: admin-spawn-pod
+    app: admin-spawn-{{ .ClientName }}
+    client: "{{ .ClientName }}"
 spec:
   containers:
     - name: admin-spawn
@@ -79,7 +80,7 @@ spec:
           cpu: "0.1"
       envFrom:
         - configMapRef:
-            name: admin-spawn-env
+            name: admin-spawn-env-{{ .ClientName }}
     - name: mariadb
       image: mariadb
       ports:
@@ -93,11 +94,11 @@ spec:
           cpu: "0.1"
       envFrom:
         - configMapRef:
-            name: db-sqlmap-env
+            name: db-sqlmap-env-{{ .ClientName }}
       volumeMounts:
         - name: data
           mountPath: /docker-entrypoint-initdb.d/
   volumes:
     - name: data
       configMap:
-        name: sql-data
+        name: sql-data-{{ .ClientName }}

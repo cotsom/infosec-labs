@@ -24,9 +24,10 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: user-number-lab
+  name: user-number
   labels:
-    app: user-number-lab-pod
+    app: user-number-{{ .ClientName }}
+    client: "{{ .ClientName }}"
 spec:
   containers:
     - name: ssh
@@ -49,4 +50,4 @@ spec:
   volumes:
     - name: user-number-flag
       configMap:
-        name: user-number-flag
+        name: user-number-flag-{{ .ClientName }}

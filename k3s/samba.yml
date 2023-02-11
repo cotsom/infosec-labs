@@ -22,9 +22,10 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: samba-lab
+  name: samba
   labels:
-    app: samba-lab-pod
+    app: samba-{{ .ClientName }}
+    client: "{{ .ClientName }}"
 spec:
   containers:
     - name: samba
@@ -34,7 +35,7 @@ spec:
         - containerPort: 445
       envFrom:
         - configMapRef:
-            name: samba-env
+            name: samba-env-{{ .ClientName }}
       volumeMounts:
         - name: samba-flag
           mountPath: /share/
@@ -48,4 +49,4 @@ spec:
   volumes:
     - name: samba-flag
       configMap:
-        name: samba-flag
+        name: samba-flag-{{ .ClientName }}
