@@ -22,7 +22,15 @@ data:
     INSERT INTO `users_info` (`id`, `login`, `password`, `vocation`) VALUES
     (2, 'moderator', 'oijrgoih34g234', 'Backend programmer');
     INSERT INTO `users_info` (`id`, `login`, `password`, `vocation`) VALUES
-    (3, 'Sam', 'oijh348ufh34f234', 'Frontend programmer');
+    (3, 'Sam', 'mirthmjiotjr', 'Frontend programmer');
+    INSERT INTO `users_info` (`id`, `login`, `password`, `vocation`) VALUES
+    (4, 'John', 'hn9u5aHGU4G', 'Designer');
+    INSERT INTO `users_info` (`id`, `login`, `password`, `vocation`) VALUES
+    (5, 'Anna', 'k9isughus443tyh', 'Trainee');
+    INSERT INTO `users_info` (`id`, `login`, `password`, `vocation`) VALUES
+    (6, 'Kyle', 'cu3hg9ijspcj', 'Data analyst');
+    INSERT INTO `users_info` (`id`, `login`, `password`, `vocation`) VALUES
+    (7, 'Lina', '{{ .Flag }}', 'AI');
 
     ALTER TABLE `users_info`
       ADD PRIMARY KEY (`id`),
@@ -40,27 +48,25 @@ data:
   MYSQL_DATABASE: "users"
   MYSQL_ROOT_PASSWORD: "password"
 ---
-
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: web-sqlmap-env
+  name: admin-spawn-env
 data:
   DB_USER: "root"
   DB_PASS: "password"
-  DB_HOST: "web-sqlmap-lab"
+  DB_HOST: "admin-spawn-lab"
 
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: web-sqlmap-lab
+  name: admin-spawn-lab
   labels:
-    app: web-sqlmap-pod
+    app: admin-spawn-pod
 spec:
   containers:
-    - name: web-sqlmap
+    - name: admin-spawn
       image: cotsom/web-sqlmap:latest
       ports:
         - containerPort: 5000
@@ -73,7 +79,7 @@ spec:
           cpu: "0.1"
       envFrom:
         - configMapRef:
-            name: web-sqlmap-env
+            name: admin-spawn-env
     - name: mariadb
       image: mariadb
       ports:

@@ -16,7 +16,7 @@ metadata:
   name: samba-flag
 data:
   flag.txt: |
-    test123
+    {{ .Flag }}
 
 ---
 apiVersion: v1

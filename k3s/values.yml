@@ -1,0 +1,36 @@
+tasks:
+  - name: secure-shell.yml
+    description: get access to your own secure shell
+    container: 1
+    category: tools
+    points: 50
+
+  - name: samba.yml
+    description: smb once told me the world...
+    container: 1
+    category: tools
+    points: 50
+
+  - name: admin-spawn.yml
+    description: where admins are born?...
+    container: 1
+    category: tools
+    points: 150
+
+  - name: domain-researcher.yml
+    description: tell me your numbers!
+    container: 1
+    category: tools
+    points: 100
+
+  - name: where-is-exit.yml
+    description: abandon hope, everyone who enters here
+    container: 1
+    category: tools
+    points: 100
+
+  - name: user-number.yml
+    description: the binary evil doppelganger
+    container: 1
+    category: tools
+    points: 300

@@ -1,52 +1,52 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: privesc-env
+  name: secure-shell-env
 data:
   PUID: "1000"
   PGID: "1000"
   TZ: "Europe/London"
   SUDO_ACCESS: "true" #optional
   PASSWORD_ACCESS: "true" #optional
-  USER_PASSWORD: "prohacker" #optional
+  USER_PASSWORD: "password" #optional
   USER_NAME: "user" #optional
 
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: privesc-flag
+  name: secure-shell-flag
 data:
   flag.txt: |
-    test12345
+    {{ .Flag }}
 
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: privesc-lab
+  name: secure-shell-lab
   labels:
-    app: privesc-lab-pod
+    app: secure-shell-lab-pod
 spec:
   containers:
-    - name: ssh
-      image: cotsom/privesc:latest
+    - name: secure-shell
+      image: lscr.io/linuxserver/openssh-server:latest
       ports:
         - containerPort: 2222
       envFrom:
         - configMapRef:
-            name: privesc-env
+            name: secure-shell-env
       volumeMounts:
-        - name: privesc-flag
-          mountPath: /root/
+        - name: secure-shell-flag
+          mountPath: /home/user/
       resources:
           limits:
-            memory: 20Mi
+            memory: 10Mi
             cpu: "0.1"
           requests:
-            memory: 20Mi
+            memory: 10Mi
             cpu: "0.1"
   volumes:
-    - name: privesc-flag
+    - name: secure-shell-flag
       configMap:
-        name: privesc-flag
+        name: secure-shell-flag
