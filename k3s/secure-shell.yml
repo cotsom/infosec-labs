@@ -8,7 +8,7 @@ data:
   TZ: "Europe/London"
   SUDO_ACCESS: "true" #optional
   PASSWORD_ACCESS: "true" #optional
-  USER_PASSWORD: "password" #optional
+  USER_PASSWORD: "powercat" #optional
   USER_NAME: "user" #optional
 
 ---
@@ -36,7 +36,7 @@ spec:
         - containerPort: 2222
       envFrom:
         - configMapRef:
-            name: secure-shell-env
+            name: secure-shell-env-{{ .ClientName }}
       volumeMounts:
         - name: secure-shell-flag
           mountPath: /home/user/

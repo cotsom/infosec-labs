@@ -4,10 +4,11 @@ metadata:
   name: samba-env
 data:
   USER: "user;password"
-  SHARE: "share;/share;yes;no;yes"
+  SHARE: "bussiness;/bussiness;yes;no;yes"
   SHARE1: "IT;/IT;yes;no;yes"
   SHARE2: "accounting;/accounting;yes;no;yes"
-  SHARE3: "bussiness;/bussiness;yes;no;yes"
+  SHARE3: "stuff;/stuff;yes;no;yes"
+  SHARE4: "share;/share;yes;no;yes"
 
 ---
 apiVersion: v1

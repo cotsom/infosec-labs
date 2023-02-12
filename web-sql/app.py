@@ -68,7 +68,7 @@ def adminLogin():
     return render_template('admin-login.html')
 
 @auth
-@app.route("/admin-page", methods=["GET", "POST"])
+@app.route("/administration", methods=["GET", "POST"])
 def adminPage():
     is_user = session.get('user', False)
     if not (is_user):
