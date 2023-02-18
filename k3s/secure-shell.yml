@@ -39,6 +39,7 @@ spec:
             name: secure-shell-env-{{ .ClientName }}
       volumeMounts:
         - name: secure-shell-flag
+          subPath: flag.txt
           mountPath: /home/user/
       resources:
           limits:

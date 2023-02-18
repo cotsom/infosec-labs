@@ -1,12 +1,12 @@
 tasks:
   - name: secure-shell.yml
-    description: get access to your own secure shell
+    description: get access to your own secure shell (Username:user, Wordlist:rockyou.txt)
     container: 1
     category: tools
     points: 50
 
   - name: samba.yml
-    description: smb once told me the world...
+    description: smb once told me the world... (Username:user, Wordlist:rockyou.txt)
     container: 1
     category: tools
     points: 50
