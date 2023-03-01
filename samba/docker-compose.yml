@@ -9,6 +9,7 @@ services:
       - SHARE2=accounting;/accounting;yes;no;yes
       - SHARE3=bussiness;/bussiness;yes;no;yes
       - SHARE4=close;/bussiness;yes;no;no
+      - FLAG=test
     ports:
       - 139:139
       - 445:445

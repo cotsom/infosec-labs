@@ -1,6 +1,10 @@
-#! /bin/sh
+#! /bin/bash
 
-flag=`echo $RANDOM | md5sum | head -c 20; echo`
-mkdir -p /share
-echo $flag > /share/flag.txt
-#while true; do sleep 1; done
+envFlag=$FLAG
+flag1=${envFlag:0:${#envFlag}/2}
+flag2=${envFlag:${#envFlag}/2}
+mkdir -p /stuff /share
+echo $flag1 > /stuff/flag1.txt
+echo $flag2 > /share/flag2.txt
+
+exec "$@"

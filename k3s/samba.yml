@@ -3,30 +3,14 @@ kind: ConfigMap
 metadata:
   name: samba-env
 data:
-  USER: "user;password"
+  USER: "user;secret"
   SHARE: "bussiness;/bussiness;yes;no;yes"
   SHARE1: "IT;/IT;yes;no;yes"
   SHARE2: "accounting;/accounting;yes;no;yes"
   SHARE3: "stuff;/stuff;yes;no;yes"
   SHARE4: "share;/share;yes;no;no"
   SHARE5: "documents;/documents;yes;no;yes"
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: samba-flag
-data:
-  flag.txt: |
-    {{ .Flag }}
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: samba-note
-data:
-  note.txt: |
-    Dude, \"password\" it's not a good password enough!
+  FLAG: {{ .Flag }}
 
 ---
 apiVersion: v1
@@ -39,18 +23,13 @@ metadata:
 spec:
   containers:
     - name: samba
-      image: dperson/samba:latest
+      image: cotsom/samba:latest
       ports:
         - containerPort: 139
         - containerPort: 445
       envFrom:
         - configMapRef:
             name: samba-env-{{ .ClientName }}
-      volumeMounts:
-        - name: samba-flag
-          mountPath: /share/
-        - name: samba-note
-          mountPath: /stuff/
       resources:
           limits:
             memory: 10Mi
@@ -58,10 +37,3 @@ spec:
           requests:
             memory: 10Mi
             cpu: "0.1"
-  volumes:
-    - name: samba-flag
-      configMap:
-        name: samba-flag-{{ .ClientName }}
-    - name: samba-note
-      configMap:
-        name: samba-note-{{ .ClientName }}
