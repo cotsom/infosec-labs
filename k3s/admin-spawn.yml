@@ -71,13 +71,13 @@ spec:
       image: cotsom/web-sqlmap:latest
       ports:
         - containerPort: 5000
-      # resources:
-      #   limits:
-      #     memory: 10Mi
-      #     cpu: "0.1"
-      #   requests:
-      #     memory: 10Mi
-      #     cpu: "0.1"
+      resources:
+        limits:
+          memory: 30Mi
+          cpu: "0.2"
+        requests:
+          memory: 30Mi
+          cpu: "0.2"
       envFrom:
         - configMapRef:
             name: admin-spawn-env-{{ .ClientName }}
@@ -87,17 +87,17 @@ spec:
         - containerPort: 3306
       resources:
         limits:
-          memory: 20Mi
+          memory: 160Mi
           cpu: "0.2"
         requests:
-          memory: 20Mi
+          memory: 160Mi
           cpu: "0.2"
       envFrom:
         - configMapRef:
             name: db-sqlmap-env-{{ .ClientName }}
       volumeMounts:
         - name: data
-          mountPath: /docker-entrypoint-initdb.d/
+          mountPath: /docker-entrypoint-initdb.d
   volumes:
     - name: data
       configMap:
