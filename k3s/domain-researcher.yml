@@ -25,11 +25,11 @@ spec:
           mountPath: /home/user/
       resources:
           limits:
-            memory: 10Mi
-            cpu: "0.1"
+            memory: 30Mi
+            cpu: "0.2"
           requests:
-            memory: 10Mi
-            cpu: "0.1"
+            memory: 30Mi
+            cpu: "0.2"
   volumes:
     - name: domain-researcher-flag
       configMap:

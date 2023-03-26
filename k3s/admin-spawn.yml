@@ -45,8 +45,8 @@ kind: ConfigMap
 metadata:
   name: db-sqlmap-env
 data:
-  MYSQL_DATABASE: "users"
-  MYSQL_ROOT_PASSWORD: "password"
+  MARIADB_DATABASE: "users"
+  MARIADB_ROOT_PASSWORD: "password"
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -71,27 +71,27 @@ spec:
       image: cotsom/web-sqlmap:latest
       ports:
         - containerPort: 5000
-      resources:
-        limits:
-          memory: 10Mi
-          cpu: "0.1"
-        requests:
-          memory: 10Mi
-          cpu: "0.1"
+      # resources:
+      #   limits:
+      #     memory: 10Mi
+      #     cpu: "0.1"
+      #   requests:
+      #     memory: 10Mi
+      #     cpu: "0.1"
       envFrom:
         - configMapRef:
             name: admin-spawn-env-{{ .ClientName }}
     - name: mariadb
-      image: mariadb
+      image: mariadb:10.8.2
       ports:
         - containerPort: 3306
       resources:
         limits:
-          memory: 10Mi
-          cpu: "0.1"
+          memory: 20Mi
+          cpu: "0.2"
         requests:
-          memory: 10Mi
-          cpu: "0.1"
+          memory: 20Mi
+          cpu: "0.2"
       envFrom:
         - configMapRef:
             name: db-sqlmap-env-{{ .ClientName }}
