@@ -9,7 +9,7 @@ app.secret_key = 'g8y348f3h4f34jf93ij4g3u49gh3487fh34fj8347hfg3487fh348jf34hf837
 sock = Sock(app)
 config = {
     "user": os.getenv("DB_USER", "root"),
-    "password": os.getenv("DB_PASS", "password"),
+    "password": os.getenv("DB_PASS"),
     "host": os.getenv("DB_HOST", "web-sqlmap-lab"),
     "port": 3306,
     "database": "users"
