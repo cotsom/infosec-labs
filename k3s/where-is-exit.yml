@@ -22,7 +22,8 @@ spec:
         - containerPort: 5000
       volumeMounts:
         - name: where-is-exit-flag
-          mountPath: /root/
+          mountPath: /root/flag.txt
+          subPath: flag.txt
       resources:
           limits:
             memory: 10Mi
@@ -34,3 +35,4 @@ spec:
     - name: where-is-exit-flag
       configMap:
         name: where-is-exit-flag-{{ .ClientName }}
+        defaultMode: 0600
